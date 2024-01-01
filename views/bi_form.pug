@@ -1,0 +1,33 @@
+extends layout 
+block content 
+    h2= title 
+    h3 #{console.log(book_instance.book)}
+    form(method="post") 
+        div.form-group
+            label(for="book") Book: 
+            select#book.form-control(name="book" required)
+                option(value="") --Please select a book--
+                for book in books 
+                    #{console.log(book._id)}
+                    if selected_book === book._id
+                        option(value=book._id, selected) #{book.title} 
+                    else
+                        option(value=book._id) #{book.title}
+            label(for='imprint') Imprint:
+            input#imprint.form-control(type='text' placeholder='Publisher and date information' name='imprint' required value=(undefined===book_instance ? '' : book_instance.imprint) )
+            label(for='dueback') Date when book available:
+            input#dueback.form-control(type='date' name='dueback' value=(undefined===book_instance ? '' : book_instance.dueback_yyyy_mm_dd))
+            label(for='status') Status:
+            select#status.form-control(name='status' required)
+                option(value='') --Please select a status--
+                each val in ['Maintenance', 'Available', 'Loaned', 'Reserved']
+                    if undefined===book_instance || book_instance.status!=val
+                        option(value=val)= val
+                    else
+                        option(value=val selected)= val
+            button.btn.btn-primary(type='submit') Submit 
+        
+    if errors 
+        ul 
+            for err in errors 
+                li!=err.msg

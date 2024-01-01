@@ -1,0 +1,12 @@
+extends layout 
+block content 
+    h2 Book: #{bi.book.title} 
+    p #[strong Imprint: ] #{bi.imprint}
+    p #[strong Status: ] #{bi.status}
+    if bi.status != 'Available'
+        p #[strong Due back on: ] #{bi.dueback_formatted}
+
+    button(style='margin-left:15px').btn.btn-primary
+        a(href=bi.url+'/update', style='color:white') Update
+    button(style='margin-left:15px').btn.btn-primary
+        a(href=bi.url+'/delete', style='color:white') Delete

@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+    h2= title
+    if author_list 
+        ul 
+            each auth in author_list 
+                li 
+                    a(href=auth.url) #{auth.family_name},  #{auth.first_name} 
+                    if auth.deathdate_formatted && auth.birthdate_formatted
+                        span (#{auth.birthdate_formatted} - #{auth.deathdate_formatted})
+                    else if auth.birthdate_formatted
+                        span (#{auth.birthdate_formatted} - Alive)
+    else
+        p No Authors available!

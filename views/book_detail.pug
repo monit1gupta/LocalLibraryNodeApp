@@ -1,0 +1,37 @@
+extends layout 
+block content 
+  h2 #{title} of #{bd.title}
+  p #[strong Author: ]
+    a(href=bd.author.url) #{bd.author.name}
+  p #[strong Summary:] #{bd.summary}
+  p #[strong ISBN:] #{bd.isbn}
+  p #[strong Genre: ]
+    each val, index in bd.genre
+      a(href=val.url) #{val.name}
+      if index < bd.genre.length - 1
+        |,&nbsp;
+
+  div(style='margin-left:20px; margin-top:20px')
+    h4 Copies 
+    each val in bd_ins
+      hr
+      if val.status == 'Available'
+        p.text-success #{val.status}
+      else if val.status =='Maintenance'
+        p.text-danger #{val.status} 
+      else
+        p.text-warning #{val.status}
+      p #[strong Imprint:] #{val.imprint}
+      if val.status != 'Available'
+        p #[strong Due Back]: #{val.dueback} 
+      p #[strong Id: ]
+        a(href=val.url) #{val._id}
+    else
+      p There are no copies of this book in the library.
+  
+  button(style='margin-left:15px').btn.btn-primary
+    a(href=bd.url+'/update', style='color:white') Update
+  button(style='margin-left:15px').btn.btn-primary
+    a(href=bd.url+'/delete', style='color:white') Delete
+
+      

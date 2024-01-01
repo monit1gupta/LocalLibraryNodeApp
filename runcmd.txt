@@ -1,0 +1,6 @@
+SET DEBUG=locallibrary-test:* & npm start
+
+node populatedb "mongodb://localhost:27017"
+mongodb://localhost:27017
+
+mongod.exe --dbpath="C:\Users\Administrator\Downloads\mongodb-windows-x86_64-7.0.4\mongodb-win32-x86_64-windows-7.0.4\db"

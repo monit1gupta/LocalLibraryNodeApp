@@ -1,0 +1,16 @@
+extends layout 
+block content 
+    h2 #{genre_sel.name} Details
+    h4 Book List
+    if book_gen_list  
+        ul 
+            each book in book_gen_list 
+                li
+                    h5= book.title 
+                    p= book.summary
+    else 
+        p This genre has no books.
+    button(style='margin-left:15px').btn.btn-primary
+        a(href=genre_sel.url+'/update', style='color:white') Update
+    button(style='margin-left:15px').btn.btn-primary 
+        a(href=genre_sel.url+'/delete' style='color:white') Delete

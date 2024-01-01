@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h2 #[strong Welcome to !{title}]
+  p The library has the following record counts:
+  ul
+    li #[strong Books: ] !{book_count}
+    li #[strong Copies:] !{bookinstance_count}
+    li #[strong Copies Available: ] !{bookinstanceavailable_count}
+    li #[strong Authors:] !{author_count}
+    li #[strong Genres:] !{genre_count}

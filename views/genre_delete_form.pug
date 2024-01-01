@@ -1,0 +1,25 @@
+extends layout 
+block content 
+    h2 #{title}: #{genre.name}
+    if books.length 
+        h5 Delete the following books, before you can delete the genre: 
+        ul
+            for book in books
+                li
+                    h4 
+                        a(href=book.url) #[strong #{book.title}]
+                    p #[strong Author: ]
+                        a(href=book.author.url) #{book.author.name}
+                    p #[strong Summary:] #{book.summary}
+                    p #[strong ISBN:] #{book.isbn}
+                    p #[strong Genre: ]
+                    each val, index in book.genre
+                        a(href=val.url) #{val.name}
+                        if index < book.genre.length - 1
+                            |,&nbsp;
+    else
+        form(method="post") 
+            div.form-group 
+                input#genreid.form-control(type="hidden", name="genreid", value="genre._id")
+            button.btn.btn-primary(type='sumbit') Delete
+

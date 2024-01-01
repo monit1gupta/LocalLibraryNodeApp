@@ -1,0 +1,17 @@
+extends layout 
+block content 
+    h2=title
+    h4 Book: #{bookinstance.book.title} 
+    p #[strong Imprint: ] #{bookinstance.imprint}
+    p #[strong Status: ] #{bookinstance.status}
+    if bookinstance.status != 'Available'
+        p #[strong Due back on: ] #{bookinstance.dueback_formatted}
+
+    if bookinstance.status == 'Available'
+        form(method="post")
+            div.form-group
+                input#biId.form-control(type="hidden", name="biId", value=bookinstance._id)
+            button.btn.btn-primary(type="submit") Delete 
+    else 
+        p Only available books can be deleted.
+    

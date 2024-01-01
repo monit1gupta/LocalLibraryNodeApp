@@ -1,0 +1,28 @@
+extends layout 
+block content 
+    h2 #{title} of #{author.first_name} #{author.family_name}
+    if author.deathdate_formatted && author.birthdate_formatted
+        p #[strong (#{author.birthdate_formatted} - #{author.deathdate_formatted})]
+    else if author.birthdate_formatted
+        p #[strong (#{author.birthdate_formatted} - Alive)]
+    h4 Books 
+    hr
+    if auth_book.length
+        each book in auth_book 
+            h6 
+                a(href=book.url) #[strong #{book.title}]
+            p #[strong ISBN:] #{book.isbn}
+            p #[strong Genre:] 
+                each gen in book.genre 
+                    a(href=gen.url) #{gen.name}
+            p #[strong Summary: ]
+            p #{book.summary}
+            hr
+    else 
+        p Author has no books.
+
+    hr
+    button(style='margin-left:15px').btn.btn-primary
+        a(href=author.url+'/update', style='color:white') Update
+    button(style='margin-left:15px').btn.btn-primary 
+        a(href=author.url+'/delete' style='color:white') Delete
